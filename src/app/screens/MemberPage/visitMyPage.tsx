@@ -1,25 +1,22 @@
 import React, {useState} from 'react';
-import { Box, Container, Stack } from '@mui/material';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TelegramIcon from '@mui/icons-material/Telegram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import Button from '@mui/material/Button';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import SettingsIcon from '@mui/icons-material/Settings';
+import { Box, Container, Stack, Button, Tab, Pagination, PaginationItem } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
+
 import { MemberPosts } from './memberPosts';
 import { MemberFollowers } from './memberFollowers';
 import { MemberFollowing } from './memberFollowing';
 import { MySettings } from './mySettings';
 
-// OTHERS
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
+// MUI ICONS
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { TuiEditor } from '../../components/tuiEditor/TuiEditor';
+import TViewer from '../../components/tuiEditor/TViewer';
 
 export function VisitMyPage(props: any) {
 	/** INITIALIZATIONS **/
@@ -38,7 +35,7 @@ export function VisitMyPage(props: any) {
 						<Stack className={'my_page_left'}>
 							<Box display={'flex'} flexDirection={'column'}>
 								<TabPanel value={'1'}>
-									<Box className={'menu_name'}>Mening Maqolalarim</Box>
+									<Box className={'menu_name'}>My Articles</Box>
 									<Box className={'menu_content'}>
 										<MemberPosts />
 										<Stack sx={{ my: '40px' }} direction="row" alignItems="center" justifyContent="center">
@@ -77,17 +74,21 @@ export function VisitMyPage(props: any) {
 								</TabPanel>
 
 								<TabPanel value={'4'}>
-									<Box className={'menu_name'}>Maqola yozish</Box>
-									<Box className={'write_content'}></Box>
+									<Box className={'menu_name'}>Writing an article</Box>
+									<Box className={'write_content'}>
+										<TuiEditor />
+									</Box>
 								</TabPanel>
 
 								<TabPanel value={'5'}>
-									<Box className={'menu_name'}>Tanlangan Maqola</Box>
-									<Box className={'menu_content'}></Box>
+									<Box className={'menu_name'}>Featured Article</Box>
+									<Box className={'menu_content'}>
+										<TViewer text={`<h3>HELLO</h3.`}/>
+									</Box>
 								</TabPanel>
 
 								<TabPanel value={'6'}>
-									<Box className={'menu_name'}>Ma'lumotlarni o'zgartirish</Box>
+									<Box className={'menu_name'}>Change Information</Box>
 									<Box className={'menu_content'}>
                                         <MySettings />
                                     </Box>
@@ -110,17 +111,20 @@ export function VisitMyPage(props: any) {
 									<span className={'order_user_name'}>Ismailov Akmal</span>
 									<span className={'order_user_prof'}>USER</span>
 								</Box>
+
 								<Box className={'user_media_box'}>
 									<FacebookIcon sx={{ cursor: "pointer" }} />
 									<InstagramIcon sx={{ cursor: "pointer" }} />
 									<TelegramIcon sx={{ cursor: "pointer" }} />
 									<YouTubeIcon sx={{ cursor: "pointer" }} />
 								</Box>
+
 								<Box className={'user_media_box'}>
 									<p className={'follows'}>Followers: 3</p>
 									<p className={'follows'}>Followings: 2</p>
 								</Box>
-								<p className={'user_desc'}>Qo'shimcha ma'lumot kiritilmagan</p>
+								<p className={'user_desc'}>No additional information is included</p>
+
 								<Box display={'flex'} justifyContent={'flex-end'} sx={{ mt: '10px' }}>
 									<TabList onChange={handleChange} aria-label="lab API tabs example">
 										<Tab
@@ -128,7 +132,7 @@ export function VisitMyPage(props: any) {
 											value={'4'}
 											component={() => (
 												<Button variant={'contained'} onClick={() => setValue('4')}>
-													Maqola Yozish
+													Writing an article
 												</Button>
 											)}
 										/>
@@ -147,7 +151,7 @@ export function VisitMyPage(props: any) {
 										component={() => (
 											<div className={`menu_box `} onClick={() => setValue('1')}>
 												<img src={'/icons/post.svg'} alt=''/>
-												<span>Maqolalarim</span>
+												<span>My Articles</span>
 											</div>
 										)}
 									/>
